@@ -1,0 +1,9 @@
+<ion-view title="Bus">
+    <ion-content class="has-header">
+        <ion-list>
+            <ion-item ng-repeat="bus in buses | filter:searchText" type="item-text-wrap" href="#/tab/bus/{{bus.id}}">
+                {{bus.nome}}
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
