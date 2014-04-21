@@ -1,4 +1,3 @@
-
 /**
  * Radio Button Inputs
  * --------------------------------------------------
@@ -47,10 +46,15 @@
 
 // Hack for Android to correctly display the checked item
 // http://timpietrusky.com/advanced-checkbox-hack
-.item-radio { 
-  -webkit-animation: androidCheckedbugfix infinite 1s; 
+.item-radio {
+  -webkit-animation: androidCheckedbugfix infinite 1s;
 }
-@-webkit-keyframes androidCheckedbugfix { 
-  from { padding:0; } 
-  to { padding:0; } 
+
+@-webkit-keyframes androidCheckedbugfix {
+  from {
+    padding: 0;
+  }
+  to {
+    padding: 0;
+  }
 }

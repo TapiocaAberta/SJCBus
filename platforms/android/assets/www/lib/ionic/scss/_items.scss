@@ -168,7 +168,6 @@ a.item {
   }
 }
 
-
 /**
  * Complex Items
  * --------------------------------------------------
@@ -184,6 +183,7 @@ a.item.item-complex,
 button.item.item-complex {
   padding: 0;
 }
+
 .item-complex .item-content,
 .item-radio .item-content {
   position: relative;
@@ -219,6 +219,7 @@ a.item-content {
   overflow: hidden;
   white-space: normal;
 }
+
 .item-complex.item-text-wrap,
 .item-complex.item-text-wrap h1,
 .item-complex.item-text-wrap h2,
@@ -230,7 +231,6 @@ a.item-content {
   overflow: hidden;
   white-space: nowrap;
 }
-
 
 /**
  * Item Icons
@@ -266,6 +266,7 @@ a.item-content {
     left: $item-padding / 2;
   }
 }
+
 .item-complex.item-icon-left {
   padding-left: 0;
 
@@ -281,6 +282,7 @@ a.item-content {
     right: $item-padding / 2;
   }
 }
+
 .item-complex.item-icon-right {
   padding-right: 0;
 
@@ -292,10 +294,10 @@ a.item-content {
 .item-icon-left.item-icon-right .icon:first-child {
   right: auto;
 }
+
 .item-icon-left.item-icon-right .icon:last-child {
   left: auto;
 }
-
 
 /**
  * Item Button
@@ -370,7 +372,6 @@ button.item.item-button-right {
   }
 }
 
-
 /**
  * Auto Right Arrow Icon
  * --------------------------------------------------
@@ -428,7 +429,6 @@ button.item-button-right:after,
   display: none;
 }
 
-
 // Item Avatar
 // -------------------------------
 
@@ -449,7 +449,6 @@ button.item-button-right:after,
   }
 }
 
-
 // Item Thumbnails
 // -------------------------------
 
@@ -468,6 +467,7 @@ button.item-button-right:after,
     width: 100%;
   }
 }
+
 .item-avatar.item-complex,
 .item-thumbnail-left.item-complex {
   padding-left: 0;
@@ -488,10 +488,10 @@ button.item-button-right:after,
     width: 100%;
   }
 }
+
 .item-thumbnail-right.item-complex {
   padding-right: 0;
 }
-
 
 // Item Image
 // -------------------------------
@@ -505,7 +505,6 @@ button.item-button-right:after,
     vertical-align: middle;
   }
 }
-
 
 // Item Body
 // -------------------------------
@@ -522,7 +521,6 @@ button.item-button-right:after,
   }
 }
 
-
 // Item Divider
 // -------------------------------
 
@@ -535,7 +533,6 @@ button.item-button-right:after,
   font-weight: bold;
 }
 
-
 // Item Note
 // -------------------------------
 
@@ -545,23 +542,22 @@ button.item-button-right:after,
   font-size: 14px;
 }
 
-
 // Item Editing
 // -------------------------------
 
 .item-left-editable .item-content,
 .item-right-editable .item-content {
   // setup standard transition settings
-  @include transition-duration( $item-edit-transition-duration );
-  @include transition-timing-function( $item-edit-transition-function );
-  @include transition-property( none );
+  @include transition-duration($item-edit-transition-duration);
+  @include transition-timing-function($item-edit-transition-function);
+  @include transition-property(none);
 }
 
 .item-left-editable .item-content {
   // set transition property for an item just left editable
   -webkit-transition-property: -webkit-transform;
-     -moz-transition-property: -moz-transform;
-          transition-property: transform;
+  -moz-transition-property: -moz-transform;
+  transition-property: transform;
 }
 
 .item-right-editable .item-content {
@@ -572,8 +568,8 @@ button.item-button-right:after,
 .item-left-editable.item-right-editable .item-content {
   // set transition property for an item that's both left/right editable
   -webkit-transition-property: -webkit-transform, margin-right;
-     -moz-transition-property: -moz-transform, margin-right;
-          transition-property: transform, margin-right;
+  -moz-transition-property: -moz-transform, margin-right;
+  transition-property: transform, margin-right;
 }
 
 .list-left-editing .item-left-editable .item-content,
@@ -588,13 +584,12 @@ button.item-button-right:after,
   margin-right: $item-right-edit-open-width;
 }
 
-
 // Item Left Edit Button
 // -------------------------------
 
 .item-left-edit {
   @include transition(all $item-edit-transition-function $item-edit-transition-duration);
-  @include translate3d( $item-left-edit-left - $item-left-edit-open-width, 0, 0);
+  @include translate3d($item-left-edit-left - $item-left-edit-open-width, 0, 0);
   position: absolute;
   top: 0;
   left: 0;
@@ -623,7 +618,6 @@ button.item-button-right:after,
   opacity: 1;
 }
 
-
 // Item Delete (Left side edit button)
 // -------------------------------
 
@@ -635,7 +629,6 @@ button.item-button-right:after,
     opacity: .7;
   }
 }
-
 
 // Item Right Edit Button
 // -------------------------------
@@ -664,7 +657,6 @@ button.item-button-right:after,
   }
 }
 
-
 // Item Reordering (Right side edit button)
 // -------------------------------
 
@@ -689,7 +681,6 @@ button.item-button-right:after,
   // placeholder for the item that's being reordered
   opacity: 0.7;
 }
-
 
 /**
  * The hidden right-side buttons that can be exposed under a list item
