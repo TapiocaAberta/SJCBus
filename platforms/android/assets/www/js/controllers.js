@@ -1,36 +1,59 @@
 angular.module('starter.controllers', [])
 
-    .controller('DashCtrl', function ($scope) {
+    .controller('DashCtrl', function ($scope, Bus) {
     })
 
     .controller('BusCtrl', function ($scope, Bus, $ionicLoading) {
-        $scope.show = function() {
+
+        $scope.show = function () {
             $scope.loading = $ionicLoading.show({
                 content: 'Loading',
             });
         };
-        $scope.hide = function(){
+
+        $scope.hide = function () {
             $scope.loading.hide();
         };
 
-        $scope.show();
+        var refreshBuses = function (buses) {
+            $scope.buses = buses;
 
-        var callback = Bus.all();
+            if (!$scope.$$phase) {
+                $scope.$digest();
+            }
+        }
 
-        callback.success(function (data) {
-            $scope.buses = data;
-            $scope.hide();
-            $scope.$apply();
-        });
+        var initializeBuses = function () {
+            $scope.show();
+
+            var callback = Bus.all();
+
+            callback.success(function (data) {
+                Bus.buses = data;
+                $scope.hide();
+                refreshBuses(Bus.buses);
+            });
+        };
+
+        if (!Bus.buses) {
+            initializeBuses();
+        }
+        else {
+            refreshBuses(Bus.buses);
+        }
     })
 
     .controller('BusDetailCtrl', function ($scope, $stateParams, Bus) {
         var busId = $stateParams.busId;
-        var callback = Bus.all();
+        $scope.bus = Bus.get(busId);
 
-        callback.success(function (data) {
-            $scope.bus = Bus.get(busId, data);
-        });
+        $scope.addToFavorites = function() {
+            $scope.bus.isFavorite = true;
+        };
+
+        $scope.removeFromFavorites = function() {
+            $scope.bus.isFavorite = false;
+        };
     })
 
     .controller('AccountCtrl', function ($scope) {

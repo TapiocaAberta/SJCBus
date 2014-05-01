@@ -7,27 +7,32 @@
 <ion-view title="{{bus.nome}}">
     <ion-content has-header="true" padding="true">
 
-        <button class="button icon-left ion-star button-positive button-block">Adicionar aos Favoritos</button>
+        <button ng-show="bus.isFavorite == false" ng-click="addToFavorites()" class="button icon-left ion-star button-positive button-block">Adicionar aos Favoritos</button>
+        <button ng-show="bus.isFavorite == true" ng-click="removeFromFavorites()" class="button icon-left ion-star button-assertive button-block">Remover dos Favoritos</button>
 
         <div class="card">
-            <div class="item item-text-wrap">
+            <div class="item item-divider">
                 <h3>Número</h3>
-
+            </div>
+            <div class="item item-text-wrap">
                 <p>{{bus.numero}}</p>
             </div>
         </div>
         <div class="card">
+            <div class="item item-divider">
+                <h3>Linha</h3>
+            </div>
             <div class="item item-text-wrap">
-                <h3>Linha:</h3>
-
                 <p>{{bus.nome}}</p>
             </div>
         </div>
 
         <div class="card">
-            <div class="item item-text-wrap">
-                <h3>Sentido:</h3>
+            <div class="item item-divider">
+                <h3>Sentido</h3>
+            </div>
 
+            <div class="item item-text-wrap">
                 <p>{{bus.sentido}}</p>
             </div>
         </div>
@@ -35,58 +40,70 @@
 
         <div class="card">
             <div class="item item-divider">
-                <h1>Horários</h1>
+                <h3>Horários</h3>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div ng-show="bus.horarios.deSegundaSexta != null" class="item item-divider">
+                <h3>Dias de Semana:</h3>
             </div>
             <div class="item item-text-wrap">
-                <h3 ng-show="bus.horarios.deSegundaSexta != null">Dias de Semana:</h3>
 
                 <p>
-    		<span ng-repeat="horario in bus.horarios.deSegundaSexta">
-    			{{horario}}
-    			<span ng-show=" ! $last "> , </span> <!-- not show on the last item -->
-    		</span>
+                    <span ng-repeat="horario in bus.horarios.deSegundaSexta">
+                        {{horario}}
+                        <span ng-show=" ! $last "> , </span> <!-- not show on the last item -->
+                    </span>
                 </p>
             </div>
         </div>
 
         <div class="card">
+            <div ng-show="bus.horarios.aosSabados != null" class="item item-divider">
+                <h3>Sábados:</h3>
+            </div>
             <div class="item item-text-wrap">
-                <h3 ng-show="bus.horarios.aosSabados != null">Sábados:</h3>
-
                 <p>
-    		<span ng-repeat="horario in bus.horarios.aosSabados">
-    			{{horario}}
-    			<span ng-show=" ! $last "> , </span> <!-- not show on the last item -->
-    		</span>
+                    <span ng-repeat="horario in bus.horarios.aosSabados">
+                        {{horario}}
+                        <span ng-show=" ! $last "> , </span> <!-- not show on the last item -->
+                    </span>
                 </p>
 
             </div>
         </div>
         <div class="card">
+            <div ng-show="bus.horarios.domingosEFeriado != null" class="item item-divider">
+                <h3>Domingos e Feriados:</h3>
+            </div>
             <div class="item item-text-wrap">
-                <h3 ng-show="bus.horarios.domingosEFeriado != null">Domingos e Feriados:</h3>
-
                 <p>
-    		<span ng-repeat="horario in bus.horarios.domingosEFeriado">
-    			{{horario}}
-    			<span ng-show=" ! $last "> , </span> <!-- not show on the last item -->
-    		</span>
+                    <span ng-repeat="horario in bus.horarios.domingosEFeriado">
+                        {{horario}}
+                        <span ng-show=" ! $last "> , </span> <!-- not show on the last item -->
+                    </span>
                 </p></div>
         </div>
 
         <div class="card">
-            <div class="item item-text-wrap">
-                <h3 ng-show="bus.horarios.observacao != null">Observações</h3>
+            <div ng-show="bus.horarios.observacao != null" class="item item-divider">
+                <h3>Observações</h3>
+            </div>
 
+            <div class="item item-text-wrap">
                 <p>
                     {{bus.horarios.observacao}}
                 </p>
             </div>
         </div>
         <div class="card">
-            <div class="item item-text-wrap">
+            <div class="item item-divider">
                 <h3>Itinerário:</h3>
+            </div>
 
+            <div class="item item-text-wrap">
                 <p>{{bus.itinerario}}</p>
             </div>
         </div>

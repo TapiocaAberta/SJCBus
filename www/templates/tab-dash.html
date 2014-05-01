@@ -1,11 +1,30 @@
 <ion-view title="Teste">
     <ion-content class="has-header padding">
 
+        <div class="list card" ng-repeat="bus in favorites">
+            <div class="item">
+                <a href="#/tab/bus/{{bus.id}}"><h2>{{bus.nome}}</h2></a>
+                <p>Sentido: <strong class="positive">{{bus.sentido}}</strong></p>
+                <p>Próxima Partida: <strong class="assertive">{{bus.proxima_partida}}</strong></p>
+            </div>
+
+            <div class="item item-body">
+                <p>
+                    <span ng-repeat="horario in bus.proximos_horarios"> <!-- verificar de onde vai pegar os horarios -->
+                        <!-- TODO: APLICAR CLASSE class="subdued assertive" para o primeiro item -->
+                        <span class="subdued" ng-class="{assertive: $first}">{{horario}}</span>
+                        <span ng-show=" ! $last "> , </span> <!-- not show on the last item -->
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <!--
         <div class="list card">
             <div class="item">
-                <h2>Putim 212 </h2>
-
-                <p>Sentido: <strong class="positive">Centro</strong></p>
+                <h2>Putim 302 </h2>
+                <p>Sentido: <strong class="positive">Bairro</strong></p>
+                <p>Próxima Partida: <strong class="assertive">25 minutos</strong></p>
             </div>
 
             <div class="item item-body">
@@ -13,43 +32,12 @@
                     <strong class="subdued assertive">22:30 ,</strong>
                     <span class="subdued">22:35 ,</span>
                     <span class="subdued">22:35 ,</span>
-                    <span class="subdued">22:35</span>
-                    <span class="subdued">22:35</span>
-                    <span class="subdued">22:35</span>
-                    <span class="subdued">22:35</span>
-                    <span class="subdued">22:35</span>
-                    <span class="subdued">22:35</span>
-                    <span class="subdued">22:35</span>
+                    <span class="subdued">22:35 ,</span>
                     <span class="subdued">22:35</span>
                 </p>
             </div>
-        </div>
+        </div> -->
 
-
-        <div class="list card">
-            <div class="item">
-                <h2>Putim 212 </h2>
-
-                <p>Sentido: <strong class="positive">Centro</strong></p>
-            </div>
-
-            <div class="item item-body">
-                <p>Próximas partidas:</p>
-                <p>
-                    <strong class="subdued assertive">22:30 ,</strong>
-                    <span class="subdued">22:35 ,</span>
-                    <span class="subdued">22:35 ,</span>
-                    <span class="subdued">22:35</span>
-                    <span class="subdued">22:35</span>
-                    <span class="subdued">22:35</span>
-                    <span class="subdued">22:35</span>
-                    <span class="subdued">22:35</span>
-                    <span class="subdued">22:35</span>
-                    <span class="subdued">22:35</span>
-                    <span class="subdued">22:35</span>
-                </p>
-            </div>
-        </div>
 
     </ion-content>
 </ion-view>
