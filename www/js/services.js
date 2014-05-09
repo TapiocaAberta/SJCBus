@@ -4,9 +4,12 @@ angular.module('starter.services', [])
  * A simple example service that returns some data.
  */
     .factory('Bus', function ($http) {
-        // Might use a resource here that returns a JSON array
 
         return {
+            favorites: [
+
+            ],
+
             all: function () {
                 return $http.get('assets/bus.json');
             },
