@@ -6,10 +6,6 @@ angular.module('starter.services', [])
     .factory('Bus', function ($http) {
         // Might use a resource here that returns a JSON array
 
-        var teste = function(){
-            return "teste";
-        }
-
         return {
             all: function () {
                 return $http.get('assets/bus.json');

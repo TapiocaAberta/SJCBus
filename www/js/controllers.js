@@ -37,22 +37,152 @@ angular.module('starter.controllers', [])
             }
         ];
 
-        var calculateNextTravell = function () {
+
+        var initializeNextTravells = function() {
             for (bus in $scope.favorites) {
-                $scope.favorites[bus].proxima_partida = "10 minutos";
-                //TODO: calcular quantos minutos faltam para a próxima viagem.
+                var bus = $scope.favorites[bus];
+                calculateNextTravell(bus);
             }
         };
 
-        var calculateNextTimes = function () {
+        var initializeNextTimes = function() {
             for (bus in $scope.favorites) {
-                $scope.favorites[bus].proximos_horarios = ["14:00", "14:10", "14:20", "14:30", "14:40"];
-                //TODO: pegar próximos cinco horários baseados no horário atual.
+                var bus = $scope.favorites[bus];
+                calculateNextTimes(bus);
             }
         };
 
-        calculateNextTravell(); // bus.proximos_horarios
-        calculateNextTimes(); //bus.proxima_partida
+        var calculateNextTravell = function (bus) {
+                bus.proxima_partida = "10 minutos";
+               //TODO: calcular quantos minutos faltam para a próxima viagem.        
+        };
+
+        var calculateNextTimes = function (bus) {
+                var times = getTimesByTheDayOfTheWeek();
+                var nextFiveTimes = getNextFiveTimes(times);
+
+                //bus.proximos_horarios = ["14:00", "14:10", "14:20", "14:30", "14:40"];
+                bus.proximos_horarios = nextFiveTimes();
+        };
+
+        var getTimesByTheDayOfTheWeek = function()
+        {
+            var dayOfTheWeek = getDayOfTheWeek();
+            var times;
+
+            if(dayOfTheWeek == "sat") 
+            {
+                times = bus.horarios.aosSabados;
+            } 
+            else if(dayOfTheWeek == "sun") 
+            {
+                times = bus.horarios.domingosEFeriado;
+            }
+            else 
+            {
+                times = bus.horarios.deSegundaSexta;    
+            }
+
+            return times;
+        };
+
+        /**
+            get the timestamp from now on the format HH:MM  
+        */
+        var getTimeStamp = function(){
+            var today = new Date();
+            var hoursFromNow = ("0" + today.getHours()).slice(-2);
+            var minutesFromNow = ("0" + today.getMinutes()).slice(-2);
+            var timestamp = hoursFromNow + ":" + minutesFromNow;
+            return timestamp;
+        };
+
+        var getNextFiveTimes = function(times) {
+
+            var nextFiveTimes = [];
+
+            times = ["14:10", "14:20", "14:30", "14:50", "14:50", "15:10", "15:20", "15:30", "15:40", "15:50"];
+            
+            for (var i = 0; i < times.length; i++) 
+            {
+                console.log(times[i], timestamp)
+
+                if(times[i] >= timestamp)
+                {
+                    nextFiveTimes.push(times[i]);                        
+
+                    if(nextFiveTimes.length == 5)
+                    {
+                        break;
+                    }
+                }
+            };
+
+            return nextFiveTimes;
+        };
+
+        /**
+            The getDay() method returns the day of the week (from 0 to 6) for the specified date.
+            Note: Sunday is 0, Monday is 1, and so on.
+        **/
+        var getDayOfTheWeek = function() {
+            var today = new Date();
+            var dayOfTheWeek = today.getDay();
+            var days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+            return days[dayOfTheWeek];
+        };
+
+
+        /**
+            get the difference between two dates.
+        **/
+        var getTimeDifference = function(earlierDate, laterDate) 
+        {
+            var oDiff = new Object();
+
+            //  Calculate Differences
+            //  -------------------------------------------------------------------  //
+            var nTotalDiff = laterDate.getTime() - earlierDate.getTime();
+
+            oDiff.days = Math.floor(nTotalDiff / 1000 / 60 / 60 / 24);
+            nTotalDiff -= oDiff.days * 1000 * 60 * 60 * 24;
+
+            oDiff.hours = Math.floor(nTotalDiff / 1000 / 60 / 60);
+            nTotalDiff -= oDiff.hours * 1000 * 60 * 60;
+
+            oDiff.minutes = Math.floor(nTotalDiff / 1000 / 60);
+            nTotalDiff -= oDiff.minutes * 1000 * 60;
+
+            oDiff.seconds = Math.floor(nTotalDiff / 1000);
+            //  -------------------------------------------------------------------  //
+
+            //  Format Duration
+            //  -------------------------------------------------------------------  //
+            //  Format Hours
+            var hourtext = '00';
+            if (oDiff.days > 0){ hourtext = String(oDiff.days);}
+            if (hourtext.length == 1){hourtext = '0' + hourtext};
+
+            //  Format Minutes
+            var mintext = '00';
+            if (oDiff.minutes > 0){ mintext = String(oDiff.minutes);}
+            if (mintext.length == 1) { mintext = '0' + mintext };
+
+            //  Format Seconds
+            var sectext = '00';
+            if (oDiff.seconds > 0) { sectext = String(oDiff.seconds); }
+            if (sectext.length == 1) { sectext = '0' + sectext };
+
+            //  Set Duration
+            var sDuration = hourtext + 'h ' + mintext + 'm ' + sectext + 's';
+            oDiff.duration = sDuration;
+            //  -------------------------------------------------------------------  //
+
+            return oDiff.duration;
+        }
+
+        initializeNextTravells(); // bus.proximos_horarios
+        initializeNextTimes(); //bus.proxima_partida
     })
 
 /***************************************************************
