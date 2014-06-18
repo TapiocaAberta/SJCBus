@@ -4,8 +4,19 @@
         <div class="list card" ng-repeat="bus in favorites">
             <div class="item">
                 <a href="#/tab/bus/{{bus.id}}"><h2>{{bus.nome}}</h2></a>
+
                 <p>Sentido: <strong class="positive">{{bus.sentido}}</strong></p>
-                <p>Próxima Partida: <strong class="assertive">{{bus.proxima_partida}}</strong></p>
+
+                <p>Próxima Partida:
+                    <strong class="assertive">
+                        <timer end-time="bus.proxima_partida">
+                            {{hours}} horas,
+                            {{minutes}} minutos,
+                            {{seconds}} segundos.
+                        </timer>
+                    </strong>
+                </p>
+
             </div>
 
             <div class="item item-body">
